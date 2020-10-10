@@ -6,13 +6,13 @@ var confirmLowercase;
 
 //password variables
 // Special characters 
-character = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
+let char = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
 // Numeric characters
-number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // lowercase characters
-lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 // uppercase characters
-upper = ["A", "B", "C", "D", "E", "F", "G" , "H", "I" , "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X" ,"Y", "Z"];
+let upper = ["A", "B", "C", "D", "E", "F", "G" , "H", "I" , "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X" ,"Y", "Z"];
 
 //start function to generate pw
 function generatePassword() {
@@ -36,9 +36,39 @@ function writePassword() {
            confirmLowercase= confirm("Are lowercase letters required?");
            confirmUppercase= confirm("Are uppercase letters required?");
         };          
-if(!confirmNumber && !confirmCharacter && !confirmLowercase && !confirmUppercase)
-        criteria = alert("YOU MUST INPUT REQUIREMENTS!!!")
-        
+if      (!confirmNumber && !confirmCharacter && !confirmLowercase && !confirmUppercase){
+            criteria = alert("YOU MUST INPUT REQUIREMENTS!!!");
+    }
+else if     (confirmNumber && confirmCharacter && confirmUppercase && confirmLowercase){
+            criteria = [char, upper, lower, number];
+}
+else if     (confirmNumber && confirmCharacter && confirmUppercase){
+            criteria = [number, char, upper];
+}
+else if     (confirmNumber && confirmCharacter){
+            criteria = [number, char];
+}   
+else if     (confirmNumber){
+            criteria = [number];
+}
+else if     (confirmCharacter && confirmLowercase && confirmUppercase){
+            criteria = [char, upper, lower];
+}
+else if      (confirmCharacter && confirmLowercase){
+            criteria = [char, lower];
+}
+else if     (confirmCharacter){
+            criteria = [char];
+}
+else if     (confirmLowercase && confirmUppercase){
+            criteria = [lower, upper];
+}
+else if     (confirmUppercase){
+            criteria = [upper];
+}
+else if     (confirmLowercase){}
+            criteria = [lower];
+}
 
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
