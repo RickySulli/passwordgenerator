@@ -6,7 +6,7 @@ var confirmLowercase;
 
 //password variables
 // Special characters 
-let char = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
+let char = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
 // Numeric characters
 let number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // lowercase characters
@@ -24,58 +24,57 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
     howMany = prompt("How many charachters does your password require?  Enter a number between 8 and 128.");
-        if (!howMany){
+if (!howMany){
             alert("This needs a value!!");
         }
         else if (howMany < 8 ||howMany>128) {
         howMany=    alert("Pick a number between 8 and 128");
+        console.log(howMany,"" )
         }
         else {
-           confirmNumber= confirm("Will this contain numbers?");
-           confirmCharacter= confirm("Will this containg special charachters?");
-           confirmLowercase= confirm("Are lowercase letters required?");
-           confirmUppercase= confirm("Are uppercase letters required?");
-        };          
+            confirmNumber= confirm("Will this contain numbers?");
+            confirmCharacter= confirm("Will this containg special charachters?");
+            confirmLowercase= confirm("Are lowercase letters required?");
+            confirmUppercase= confirm("Are uppercase letters required?");
+            console.log(confirmNumber, confirmCharacter, confirmLowercase, confirmUppercase)
+                };   
+                     
 if      (!confirmNumber && !confirmCharacter && !confirmLowercase && !confirmUppercase){
-            criteria = alert("YOU MUST INPUT REQUIREMENTS!!!");
-    }
-else if     (confirmNumber && confirmCharacter && confirmUppercase && confirmLowercase){
-            criteria = [char, upper, lower, number];
+            alert("YOU MUST INPUT REQUIREMENTS!!!");
+   
+     }let criteria = [""];  
+     if(confirmNumber=true){
+         criteria += number;
+     }
+    
+     if(confirmCharacter=true){
+         criteria += char;
+     }
+     
+     if (confirmLowercase=true){
+         criteria += lower;
+     }
+     
+     if (confirmUppercase=true){
+         criteria += upper;
+     }
+     
+var newpassword = ""
+criteria = criteria.split(",");
+for (var i = 0; i < howMany; i++){
+ newpassword = newpassword + criteria[Math.floor(Math.random()* criteria.length)];
+ console.log(newpassword);
 }
-else if     (confirmNumber && confirmCharacter && confirmUppercase){
-            criteria = [number, char, upper];
-}
-else if     (confirmNumber && confirmCharacter){
-            criteria = [number, char];
-}   
-else if     (confirmNumber){
-            criteria = [number];
-}
-else if     (confirmCharacter && confirmLowercase && confirmUppercase){
-            criteria = [char, upper, lower];
-}
-else if      (confirmCharacter && confirmLowercase){
-            criteria = [char, lower];
-}
-else if     (confirmCharacter){
-            criteria = [char];
-}
-else if     (confirmLowercase && confirmUppercase){
-            criteria = [lower, upper];
-}
-else if     (confirmUppercase){
-            criteria = [upper];
-}
-else if     (confirmLowercase){}
-            criteria = [lower];
+var passwordText = document.querySelector("#password");
+
+passwordText.value = newpassword;
 }
 
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+ // var password = writePassword();
+//console.log(password);
 
-}
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
